@@ -19,11 +19,47 @@
             <label for="height">Height (cm):</label>
             <input type="number" id="height" placeholder="Enter height">
         </div>
-        <button id="calculate">Calculate BMI</button>
+        <div class="input-container">
+            <label for="age">Age (year):</label>
+            <input type="number" id="age" placeholder="Enter age">
+        </div>
+        <div class="input-container">
+            <label for="gender">Gender :</label>
+            <!-- option list male/female -->
+            <select id="gender">
+                <option value="0">male</option>
+                <option value="1">female</option>
+            </select>
+        </div>
+        <button id="calculate">Update</button>
         <div id="result"></div>
     </div>
+
+    <div class="container">
+        <h2>Data diri</h2>
+        <!-- Display user username -->
+        <h3 id="username">
+            <%= username %>
+        </h3>
+        <table id="data-table">
+            <thead>
+                <tr>
+                    <th>Weight</th>
+                    <th>Height</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>BMI</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+
+
     <!-- add logout button -->
-    <div class="logout">
+    <div class="container">
         <a href="/logout">Logout</a>
     </div>
     <script src="/js/script.js"></script>

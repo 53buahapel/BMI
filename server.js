@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 8000;
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
@@ -23,6 +23,10 @@ async function connectToDatabase() {
     }
 }
 connectToDatabase();
+
+
+// setting view engine
+app.set('view engine', 'pug');
 
 // routes
 require('./app/routes/route')(app);
@@ -113,10 +117,54 @@ app.get('/calculate', async (req, res) => {
         if (!token1) {
             return res.status(301).redirect('/login');
         }
-        res.sendFile(__dirname + '/view/calculate.html');
+        res.render(__dirname + '/view/calculate.html');
+        const username = token1.username;
     } catch (err) {
         console.error(err);
         res.status(301).redirect('/login');
+    }
+});
+
+app.post('/calculate', async (req, res) => {
+    try {
+        const { weight, height, age, gender, bmi } = req.body;
+        const token = req.cookies.jwt;
+        const user1 = await user.findOne({ where: { token: token } });
+        if (user1) {
+            user1.weight = weight;
+            user1.height = height;
+            user1.age = age;
+            user1.gender = gender;
+            user1.bmi = bmi;
+
+            await user1.save();
+            res.status(200).json({ message: 'success' });
+        }
+    } catch (error) {
+        console.error('Error querying the database:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.get('/data', async (req, res) => {
+    try {
+        const token = req.cookies.jwt;
+        const user1 = await user.findOne({ where: { token: token } });
+        if (user1) {
+            const responseData = {
+                weight: user1.weight,
+                height: user1.height,
+                age: user1.age,
+                gender: user1.gender,
+                bmi: user1.bmi
+            };
+            res.status(200).json(responseData);
+        } else {
+            res.status(404).json({ error: 'User not found' });
+        }
+    } catch (error) {
+        console.error('Error querying the database:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
