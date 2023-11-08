@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="css/stylecalculate.css">
     <title>BMI Calculator</title>
 </head>
 
@@ -36,10 +36,10 @@
     </div>
 
     <div class="container">
-        <h2>Data diri</h2>
-        <!-- Display user username -->
-        <h3 id="username">
-            <%= username %>
+        <h2>Data Diri</h2>
+        <div class="nama">
+            <%- username %>
+        </div>
         </h3>
         <table id="data-table">
             <thead>
@@ -60,7 +60,11 @@
 
     <!-- add logout button -->
     <div class="container">
-        <a href="/logout">Logout</a>
+        <a href="/logout">
+            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">
+                Logout
+            </button>
+        </a>
     </div>
     <script src="/js/script.js"></script>
 </body>

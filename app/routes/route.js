@@ -1,4 +1,4 @@
-const staticpath = 'C:\\Users\\rafim\\Desktop\\bew\\BMI\\view\\'
+const staticpath = 'C:\\Users\\rafim\\Desktop\\bew\\BMI\\views\\'
 
 
 module.exports = function (app) {

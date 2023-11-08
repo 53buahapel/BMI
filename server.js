@@ -24,9 +24,8 @@ async function connectToDatabase() {
 }
 connectToDatabase();
 
-
 // setting view engine
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 
 // routes
 require('./app/routes/route')(app);
@@ -117,8 +116,8 @@ app.get('/calculate', async (req, res) => {
         if (!token1) {
             return res.status(301).redirect('/login');
         }
-        res.render(__dirname + '/view/calculate.html');
         const username = token1.username;
+        res.render('calculate', { username: username });
     } catch (err) {
         console.error(err);
         res.status(301).redirect('/login');
@@ -136,7 +135,6 @@ app.post('/calculate', async (req, res) => {
             user1.age = age;
             user1.gender = gender;
             user1.bmi = bmi;
-
             await user1.save();
             res.status(200).json({ message: 'success' });
         }
