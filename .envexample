@@ -1,0 +1,6 @@
+db_host = redacted
+db_user = redacted
+db_pass = redacted
+db_name = redacted
+db_port = redacted
+jwt_secret = redacted
